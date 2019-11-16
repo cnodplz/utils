@@ -1,0 +1,91 @@
+#!/bin/bash
+R="\033[0;34m"
+G="\033[1;32m"
+B="\033[0;33m"
+GR="\033[0;31m"
+W="\033[0;29m"
+
+trips() {
+    printf "${R}%-10s${G}%-10s${B}%-10s${W}%-10s\n" "$@"
+}
+
+tripsred() {
+    shift
+    printf "${R}%-10s${W}" "$@"
+    printf "\n"
+}
+
+tripsgreen() {
+    shift
+    printf "${G}%-10s${W}" "$@"
+    printf "\n"
+}
+
+tripsblue() {
+    shift
+    printf "${B}%-10s${W}" "$@"
+    printf "\n"
+}
+
+tripsall() {
+    if [ "$1" = "red" ]; then
+        tripsred "$@"
+    elif [ "$1" = "green" ]; then
+        tripsgreen "$@"
+    elif [ "$1" = "blue" ]; then
+        tripsblue "$@"
+    else
+        trips "$@"
+    fi
+}
+
+default() {
+    echo -e "${R}[ $0 $(date) ]\n${G}[ USE: $0 <|list|find filepath name> ]\n${B}[ $(uname -a)\n$(nmcli device status | egrep --color=auto connected) ]${W}"
+    #echo -e "lines\ncols"|tput -S
+    #echo $(tput cols)x$(tput lines)
+    #for x in `seq 1 $(tput cols)`; do echo -en "-"; done
+    ENDER=$(tput cols)
+    #printf "%-10s%-10s%-10s%-10s\n" "DEC" "HEX" "PEN" "DESCRIPTION"
+    trips DEC HEX PEN DESCRIPTION
+    for ((i=1;i<=$ENDER;i++)); do echo -en "-"; done
+    tripsall red "64" "128" "1024" "oooosblelasdf"
+    tripsall green "64" "128" "1024" "oooosblelasdf"
+    tripsall blue "64" "128" "1024" "oooosblelasdf"
+    tripsall "128" "1024" "4096" "safdawerwerwerwwww" "pentest" "pentest2" ok ok ok ok ok ok
+    trips "1111" "2222" "3333" "XXXXXXXXXXXXXXX"
+}
+
+finder() {
+    find "$1" -type f -iname "*$2*" -print0 2>/dev/null | sort -z | xargs -r0 ls -l
+}
+
+lister() {
+    A=0
+    while [ $A -ne 1 ]; do
+    echo -e "list?\nEnter 1"
+    read -t 3 -n 1 A
+    done
+    echo -e "\nBYE"
+}
+
+args() {
+    #while true; do
+    for x in $@; do echo -en "\t${R}$x${W}\b\b\b\b\b\b\b"; sleep 1; done
+    #done
+    echo ""
+}
+
+colors() {
+    for x in {29..47}; do echo -e "$x 0,1: \033[0;${x}mcolors${W} \033[1;${x}mcolors${W}"; done
+}
+
+if [ "$1" = "list" ]; then
+    lister
+elif [ "$1" = "find" ]; then
+    finder "$3" "$2"
+elif [ "$1" = "colors" ]; then
+    colors
+else
+    default
+    args oooh weee wooo oooh weee wooo
+fi

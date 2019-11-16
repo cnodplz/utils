@@ -1,0 +1,64 @@
+#!/usr/bin/env python
+
+lcount, somno = 1, 1
+rlist = []
+
+warning = "############################################################################\n# WARNING - Do not modify this file directly!                              #\n# This file has been built using the iptables-builder script in cws.       #\n# Please use cws iptables-builder to modify iptables rules on this system. #\n############################################################################\n"
+
+defaults = "default fw rules\ndef\n"
+
+rule1 = {'rulename' : "### rulename ###\n-A RH-Firewall-1-INPUT -m tcp -p tcp --dport 111 -j ACCEPT\n"}
+
+rule2 = {1 : 'IBM Director', 2 : 'SSH', 3 : 'StorageEssentials', 4 : 'BigFix', 5 : 'OpsWare'}
+
+print warning,
+print defaults
+
+#for x in rule2.len
+#rule2[str(lcount)]
+#def f1(rule2):
+    #for x, y in rule1.iteritems():
+        #print lcount, ": ", x
+        #lcount += 1
+
+def f1(rule2):
+    for t in rule2.keys():
+        print t, ": ", rule2[t]
+
+def f2(somno, rlist, rule1, rule2, warning, defaults):
+    if (somno == 1):
+        rlist.append(rule2[somno])
+        print "Added: ", rule2[somno]
+        return rlist
+    elif (somno == 2):
+        rlist.append(rule2[somno])
+        print "Added: ", rule2[somno]
+        return rlist
+    elif (somno == 3):
+        rlist.append(rule2[somno])
+        print "Added: ", rule2[somno]
+        return rlist
+    elif (somno == 4):
+        rlist.append(rule2[somno])
+        print "Added: ", rule2[somno]
+        return rlist
+    elif (somno == 5):
+        rlist.append(rule2[somno])
+        print "Added: ", rule2[somno]
+        return rlist
+    elif (somno == 9):
+        print warning,
+        print defaults
+        for x in rlist:
+            print rule1[x]    
+        pass
+    else:
+        return rlist
+#for t in rule2.keys():
+ #   print t, ": ", rule2[t]
+
+while (somno != 0):
+    print "-----fwrules-----"
+    f1(rule2)
+    f2(somno, rlist, rule1, rule2, warning, defaults)
+    somno = input("9 :  SHOW\n0 :  EXIT\n")
